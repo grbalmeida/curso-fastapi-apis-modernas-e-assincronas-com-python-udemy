@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import FastAPI, HTTPException, status, Response, Path, Query
+from fastapi import FastAPI, HTTPException, status, Response, Path, Query, Header
 from models import Curso
 
 app = FastAPI()
@@ -56,8 +56,10 @@ async def delete_curso(curso_id: int):
 # http://localhost:8000/calculadora?a=1&b=2&c=3
 @app.get('/calculadora')
 # async def calcular(a: Optional[int] = 0, b: Optional[int] = 0, c: Optional[int] = 0):
-async def calcular(a: int = Query(default=None, gt=5), b: int = Query(default=None, gt=10), c: Optional[int] = 0):
+async def calcular(a: int = Query(default=None, gt=5), b: int = Query(default=None, gt=10), c: Optional[int] = 0, x_geek: str = Header(default=None)):
     soma = a + b + c
+
+    print(f'X-GEEK: {x_geek}')
 
     return {"resultado": soma}    
 
