@@ -22,7 +22,7 @@ async def post_curso(curso: CursoSchema, db: AsyncSession = Depends(get_session)
 @router.get('/', response_model=List[CursoSchema])
 async def get_cursos(db: AsyncSession = Depends(get_session)):
     async with db as session:
-        query = select(CursoModel)
+        query = select(CursoModel).order_by(CursoModel.id)
         result = await session.execute(query)
         cursos: List[CursoModel] = result.scalars().all()
 
