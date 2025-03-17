@@ -1,4 +1,4 @@
-from typing import List
+from typing import ClassVar, List
 
 from pydantic import AnyHttpUrl
 from pydantic_settings import BaseSettings
@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     """
     API_V1_STR: str = '/api/v1'
     DB_URL: str = 'postgresql+asyncpg://geek:university@localhost:5432/faculdade'
-    DBBaseModel = declarative_base()
+    DBBaseModel: ClassVar = declarative_base()
 
     class Config:
         case_sensitive = True
